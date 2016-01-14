@@ -15,18 +15,21 @@ There are the result of working in angular projects where i use a lot of web ser
 - Accept simple value as array
 
 Example: 
-Without the provider
 
-Array with one element:
+Without the provider:
 
+```json
 {
     "foo": {"msg": "Hello World" }
 }
+```
 
 With the provider
+```json
 {
     "foo": [{"msg": "Hello World" }]
 }
+```
 
 - Disable the use of getters and setter as mapper by default
 
