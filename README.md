@@ -19,18 +19,21 @@ Works with OffsetDateTime
 - Accept simple value as array
 
 Example: 
-Without the provider
 
-Array with one element:
+Without the provider:
 
+```json
 {
     "foo": {"msg": "Hello World" }
 }
+```
 
 With the provider
+```json
 {
     "foo": [{"msg": "Hello World" }]
 }
+```
 
 - Disable the use of getters and setter as mapper by default
 
