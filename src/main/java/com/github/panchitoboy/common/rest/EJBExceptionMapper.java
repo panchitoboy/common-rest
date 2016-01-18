@@ -4,32 +4,29 @@ import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 import java.util.Set;
-import javax.inject.Inject;
+import javax.ejb.EJBException;
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
-import javax.validation.ValidationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
-import org.apache.deltaspike.core.api.config.ConfigProperty;
 
 @Provider
-public class ValidationExceptionMapper implements ExceptionMapper<ValidationException> {
+public class EJBExceptionMapper implements ExceptionMapper<EJBException> {
 
     @Context
     HttpServletRequest req;
 
-    @Inject
-    @ConfigProperty(name = "validation.exception.messages.file", defaultValue = "messages")
-    String resourceBundleFile;
+    public static final String resourceBundleFile = "messages";
 
     @Override
-    public Response toResponse(ValidationException exception) {
+    public Response toResponse(EJBException ex) {
+        Exception exception = ex.getCausedByException();
         if (exception instanceof ConstraintViolationException) {
             JsonArrayBuilder array = Json.createArrayBuilder();
             ConstraintViolationException cve = (ConstraintViolationException) exception;
